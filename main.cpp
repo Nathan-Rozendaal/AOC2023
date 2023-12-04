@@ -1,5 +1,5 @@
 #include <iostream>
-#include "day3/day3.cpp"
+#include "day4/day4.cpp"
 
 int main() {
     runpart1();
