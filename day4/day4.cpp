@@ -83,25 +83,20 @@ void runpart2() {
 
     }
     result = cards.size();
-    std::reverse(cards.begin(), cards.end());
-    while (!cards.empty()){
-        card current = cards.back();
-
-        for (int i = 0; i < current.copies; ++i) {
+    for (int i = 0; i < cards.size(); ++i) {
+        card current = cards[i];
+        for (int j = 0; j < current.copies; ++j) {
             std::vector<int> v_intersection;
             std::set_intersection(current.winningNumbers.begin(), current.winningNumbers.end(),
                                   current.gotNumbers.begin(), current.gotNumbers.end(),
                                   std::back_inserter(v_intersection));
 
-            int nextCardIndex = cards.size() -2;
-            int lastCardIndex= nextCardIndex - v_intersection.size();
-            for (int j = nextCardIndex; j > lastCardIndex; --j) {
-                cards[j].copies ++;
+            int lastCardIndex= i + v_intersection.size();
+            for (int k = i + 1; k <= lastCardIndex; ++k) {
+                cards[k].copies ++;
                 result ++;
             }
         }
-        cards.pop_back();
     }
-
     std::cout<<result<<std::endl;
 }
