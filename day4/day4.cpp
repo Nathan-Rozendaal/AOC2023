@@ -47,9 +47,7 @@ void runpart1() {
         if(!v_intersection.empty()){
             int value = 1;
             int iterations = v_intersection.size() -1;
-            for (int i = 0; i < iterations; ++i) {
-                value = value << 1;
-            }
+            value = value << iterations;
             result += value;
         }
     }
@@ -89,12 +87,11 @@ void runpart2() {
         std::set_intersection(current.winningNumbers.begin(), current.winningNumbers.end(),
                               current.gotNumbers.begin(), current.gotNumbers.end(),
                               std::back_inserter(v_intersection));
+
         int lastCardIndex= i + v_intersection.size();
-        for (int j = 0; j < current.copies; ++j) {
-            for (int k = i + 1; k <= lastCardIndex; ++k) {
-                cards[k].copies ++;
-                result ++;
-            }
+        for (int j = i + 1; j <= lastCardIndex; ++j) {
+            cards[j].copies += current.copies;
+            result += current.copies;
         }
     }
     std::cout<<result<<std::endl;
